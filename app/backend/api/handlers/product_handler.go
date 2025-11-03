@@ -32,3 +32,24 @@ func AddProduct(service product.Service) fiber.Handler {
 		return c.JSON(presenter.ProductSuccessResponse(result))
 	}
 }
+
+func GetProduct(service product.Service) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		var parameters string
+		err := c.ParamsParser(parameters)
+
+		if err != nil {
+			c.Status(http.StatusInternalServerError)
+			return c.JSON(presenter.ProductErrorResponse(err))
+		}
+
+		result, err := service.GetProduct(parameters)
+
+		if err != nil {
+			c.Status(http.StatusInternalServerError)
+			return c.JSON(presenter.ProductErrorResponse(err))
+		}
+
+		return c.JSON(presenter.ProductSuccessResponse(result))
+	}
+}

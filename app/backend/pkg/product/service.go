@@ -7,6 +7,11 @@ type service struct {
 	repo Repository
 }
 
+// GetProduct implements Service.
+func (s *service) GetProduct(id string) (*entities.Product, error) {
+	return s.repo.FetchProduct(id)
+}
+
 // InsertBook implements Service.
 func (s *service) InsertProduct(product *entities.Product) (*entities.Product, error) {
 	return s.repo.CreateProduct(product)
@@ -15,6 +20,7 @@ func (s *service) InsertProduct(product *entities.Product) (*entities.Product, e
 //--|| Adicionar a interface aqui ||--\\
 type Service interface {
 	InsertProduct(product *entities.Product) (*entities.Product, error)
+	GetProduct(id string) (*entities.Product, error)
 }
 
 func NewService(r Repository) Service {

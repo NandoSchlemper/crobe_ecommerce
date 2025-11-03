@@ -37,12 +37,13 @@ func main() {
 	productService := product.NewService(productRepo)
 
 	app := fiber.New()
+	// app.Get("/docs/*", scalar.New())
 	app.Use(cors.New())
 	app.Get("/", func(ctx *fiber.Ctx) error {
 		return ctx.Send([]byte("Welcome to the clean-architecture mongo product shop!"))
 	})
 	api := app.Group("/api")
-	routes.BookRouter(api, productService)
+	routes.ProductRouter(api, productService)
 	log.Fatal(app.Listen(":8080"))
 }
 

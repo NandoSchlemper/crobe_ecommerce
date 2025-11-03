@@ -7,6 +7,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func BookRouter(app fiber.Router, service product.Service) {
-	app.Get("/books", handlers.AddProduct(service))
+func ProductRouter(app fiber.Router, service product.Service) {
+	app.Post("/product", handlers.AddProduct(service))
+	app.Get("/product/:id", handlers.GetProduct(service)) // individual Products
+	app.Get("/product")                                   // multiple products
 }
