@@ -1,6 +1,16 @@
 {
-  "title": "My API Documentation",
-  "layout": "modern",
-  "theme": "purple",
-  "darkMode": true
+  "$schema": "https://cdn.scalar.com/schema/scalar-config.json",
+  "subdomain": "crobe-ecommerce-documentation",
+  "guides": [
+    {
+      "name": "Crobê Docs",
+      "sidebar": [
+        {
+          "path": "docs/introduction.md",
+          "type": "page"
+        }
+      ]
+    }
+  ],
+  "references": []
 }
