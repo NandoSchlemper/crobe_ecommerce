@@ -1,6 +1,7 @@
 {
   "$schema": "https://cdn.scalar.com/schema/scalar-config.json",
   "subdomain": "crobe-ecommerce-documentation",
+  "publishOnMerge": true,
   "guides": [
     {
       "name": "Crobê Docs",
@@ -12,5 +13,10 @@
       ]
     }
   ],
-  "references": []
+  "references": [
+    {
+        "name": "API Reference",
+        "path": "docs/openapi.yaml"
+  }
+]
 }
