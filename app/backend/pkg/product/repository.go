@@ -18,7 +18,6 @@ type repository struct {
 	Collection *mongo.Collection
 }
 
-// FetchProduct implements Repository.
 func (r *repository) FetchProduct(id string) (*entities.Product, error) {
 	var product entities.Product
 	objId, err := primitive.ObjectIDFromHex(id)
