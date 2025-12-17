@@ -1,8 +1,7 @@
-package product
+package repository
 
 import (
 	"context"
-	"crobe-ecommerce/app/backend/pkg/entities"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/v2/bson"
@@ -10,17 +9,17 @@ import (
 )
 
 type Repository interface {
-	CreateProduct(product *entities.Product) (*entities.Product, error)
-	FetchProduct(id string) (*entities.Product, error)
-	DeleteProduct(product *entities.DeleteRequest) error
+	CreateProduct(product *Product) (*Product, error)
+	FetchProduct(id string) (*Product, error)
+	DeleteProduct(product *DeleteRequest) error
 }
 
 type repository struct {
 	Collection *mongo.Collection
 }
 
-func (r *repository) FetchProduct(id string) (*entities.Product, error) {
-	var product entities.Product
+func (r *repository) FetchProduct(id string) (*Product, error) {
+	var product Product
 	objId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return nil, err
@@ -35,7 +34,7 @@ func (r *repository) FetchProduct(id string) (*entities.Product, error) {
 }
 
 // CreateProduct implements Repository.
-func (r *repository) CreateProduct(product *entities.Product) (*entities.Product, error) {
+func (r *repository) CreateProduct(product *Product) (*Product, error) {
 	product.ID = primitive.NewObjectID()
 	_, err := r.Collection.InsertOne(context.Background(), product)
 	if err != nil {
@@ -44,7 +43,7 @@ func (r *repository) CreateProduct(product *entities.Product) (*entities.Product
 	return product, nil
 }
 
-func (r *repository) DeleteProduct(product *entities.DeleteRequest) error {
+func (r *repository) DeleteProduct(product *DeleteRequest) error {
 	objId, err := primitive.ObjectIDFromHex(product.ID)
 	if err != nil {
 		return err

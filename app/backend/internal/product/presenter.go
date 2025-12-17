@@ -1,19 +1,17 @@
-package presenter
+package product
 
 import (
-	"crobe-ecommerce/app/backend/pkg/entities"
-
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Product struct {
+type ProductPresenter struct {
 	ID          primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 	Description string             `json:"description"`
 }
 
 // Singular SuccessResponse that will be passed in the response by Handler
-func ProductSuccessResponse(data *entities.Product) *fiber.Map {
+func ProductSuccessResponse(data *Product) *fiber.Map {
 	product := Product{
 		ID:          data.ID,
 		Description: data.Description,
@@ -26,7 +24,7 @@ func ProductSuccessResponse(data *entities.Product) *fiber.Map {
 }
 
 // List of SuccessResponse that will be passed in the response by Handler
-func ProductsSuccessResponse(data *[]Product) *fiber.Map {
+func ProductsSuccessResponse(data *[]ProductPresenter) *fiber.Map {
 	return &fiber.Map{
 		"status": true,
 		"data":   data,

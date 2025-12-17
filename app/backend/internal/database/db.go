@@ -11,6 +11,7 @@ import (
 
 func DatabaseConnection() (*mongo.Database, *mongo.Client, error) {
 	uri := os.Getenv("MONGO_DB_URL")
+	name := os.Getenv("MONGO_DB_NAME")
 
 	if uri == "" {
 		return nil, nil, errors.New("erro ao carregar a variavel de ambiente do DB")
@@ -28,6 +29,6 @@ func DatabaseConnection() (*mongo.Database, *mongo.Client, error) {
 		return nil, nil, err
 	}
 
-	db := client.Database("crobedatabase")
+	db := client.Database(name)
 	return db, client, nil
 }

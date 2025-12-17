@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"crobe-ecommerce/app/backend/api/routes"
 	"crobe-ecommerce/app/backend/pkg/database"
 	"crobe-ecommerce/app/backend/pkg/product"
 	"fmt"
@@ -40,6 +39,6 @@ func main() {
 		return ctx.Send([]byte("Crobe E-commerce API is running"))
 	})
 	api := app.Group("/api")
-	routes.ProductRouter(api, productService)
+	product.ProductRouter(api, productService)
 	log.Fatal(app.Listen(":8080"))
 }
