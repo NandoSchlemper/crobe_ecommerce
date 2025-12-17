@@ -37,7 +37,7 @@ func ProductsSuccessResponse(data *[]Product) *fiber.Map {
 // Basically the error response by Handler
 func ProductErrorResponse(err error) *fiber.Map {
 	return &fiber.Map{
-		"status": true,
+		"status": false,
 		"data":   "",
 		"error":  err.Error(),
 	}
