@@ -24,7 +24,7 @@
     "window.zoomLevel": 0.2,
     "editor.fontSize": 15,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 80,
+    "editor.wordWrapColumn": 90,
     "workbench.sideBar.location": "right",
     "workbench.activityBar.location": "hidden",
     "editor.scrollbar.horizontal": "hidden",

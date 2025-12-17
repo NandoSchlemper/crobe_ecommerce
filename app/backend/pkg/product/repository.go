@@ -12,6 +12,7 @@ import (
 type Repository interface {
 	CreateProduct(product *entities.Product) (*entities.Product, error)
 	FetchProduct(id string) (*entities.Product, error)
+	DeleteProduct(product *entities.DeleteRequest) error
 }
 
 type repository struct {
@@ -34,13 +35,23 @@ func (r *repository) FetchProduct(id string) (*entities.Product, error) {
 }
 
 // CreateProduct implements Repository.
-func (r *repository) CreateProduct(book *entities.Product) (*entities.Product, error) {
-	book.ID = primitive.NewObjectID()
-	_, err := r.Collection.InsertOne(context.Background(), book)
+func (r *repository) CreateProduct(product *entities.Product) (*entities.Product, error) {
+	product.ID = primitive.NewObjectID()
+	_, err := r.Collection.InsertOne(context.Background(), product)
 	if err != nil {
 		return nil, err
 	}
-	return book, nil
+	return product, nil
+}
+
+func (r *repository) DeleteProduct(product *entities.DeleteRequest) error {
+	objId, err := primitive.ObjectIDFromHex(product.ID)
+	if err != nil {
+		return err
+	}
+	filter := bson.M{"_id": objId}
+	_, err = r.Collection.DeleteOne(context.Background(), filter)
+	return err
 }
 
 func NewRepo(coll *mongo.Collection) Repository {
